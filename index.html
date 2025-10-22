@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description"
+    content="Pocket Classroom is an interactive online learning platform that helps students access lessons, quizzes, and study materials anytime, anywhere. It’s designed to make education flexible, fun, and accessible for everyone.">
+  <meta name="keywords"
+    content="Pocket Classroom, study app, online learning, virtual classroom, e-learning, education platform">
+  <meta name="author" content="Mahdia Askari">
+  <title>Pocket Classroom</title>
+
+  <!-- Bootstrap & Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100..900;1,100..900&family=Fredoka:wght@300..700&display=swap"
+    rel="stylesheet">
+
+  <!-- Styles & Icon -->
+  <link rel="stylesheet" href="./css/style.css" />
+  <link rel="icon" type="image/jpg" href="Assets/icon.jpg" />
+</head>
+
+<body>
+  <!-- HEADER: Navbar -->
+  <header class="topbar">
+    <nav class="navbar navbar-expand-lg">
+      <div class="container-fluid">
+        <a class="navbar-brand d-flex align-items-center gap-2" href="#">🎓 Pocket Classroom</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTabs"
+          aria-controls="navbarTabs" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarTabs">
+          <ul class="navbar-nav mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a href="#" class="nav-link active tab-btn m-1" data-view="library" id="tab-library">Library</a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link tab-btn m-1" data-view="learn" id="tab-learn">Learn</a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link tab-btn m-1" data-view="author" id="tab-author">Author</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main>
+    <!-- Utility Buttons -->
+    <div class="actions-wrapper full-right">
+      <section class="actions d-flex align-items-end gap-2">
+        <button id="btn-new" class="btn btn-primary d-flex align-items-center gap-1">
+          <i class="bi bi-plus-lg"></i> New Capsule
+        </button>
+        <label class="btn btn-outline-secondary d-flex align-items-center gap-1 mb-0" for="import-file">
+          <i class="bi bi-upload"></i> Import JSON
+        </label>
+        <input id="import-file" type="file" accept="application/json" hidden>
+        <button id="btn-theme" class="btn btn-light border d-flex align-items-center" title="Light/Dark Theme">
+          <i class="bi bi-brightness-high"></i>
+        </button>
+      </section>
+    </div>
+
+    <!-- LIBRARY -->
+    <section id="view-library" class="view active" aria-labelledby="tab-library">
+      <div id="library-wrapper" class="panel">
+        <div id="library-empty" class="empty hidden">
+          <i class="bi bi-inboxes"></i>
+          <p>Import a JSON file or create your own Capsule.</p>
+        </div>
+        <div id="library-grid" class="grid" role="list"></div>
+      </div>
+    </section>
+
+    <!-- AUTHOR -->
+    <section id="view-author" class="view" aria-labelledby="tab-author">
+      <div class="panel">
+        <h2><i class="bi bi-sliders2-vertical"></i> Basic Information</h2>
+        <div class="form-grid">
+          <label>Title
+            <input id="meta-title" type="text" placeholder="e.g. Carbohydrates" aria-required="true">
+          </label>
+          <label>Subject
+            <input id="meta-subject" type="text" placeholder="e.g. Biology">
+          </label>
+          <label>Level
+            <select id="meta-level">
+              <option value="Beginner">Beginner</option>
+              <option value="Intermediate">Intermediate</option>
+              <option value="Advanced">Advanced</option>
+            </select>
+          </label>
+          <label class="span-2">Description
+            <textarea id="meta-desc" rows="2" placeholder="This is a capsule for..."></textarea>
+          </label>
+        </div>
+      </div>
+      <div class="panel">
+        <h2><i class="bi bi-journal-text"></i> Notes</h2>
+        <textarea id="notes-input" rows="8" placeholder="Enter your notes..."></textarea>
+      </div>
+      <div class="panel">
+        <h2><i class="bi bi-card-text"></i> Flashcards</h2>
+        <div id="fc-rows" class="rows"></div>
+        <div class="row-actions">
+          <button id="btn-add-fc" class="btn"><i class="bi bi-plus-circle"></i> Add Flashcard</button>
+        </div>
+      </div>
+      <div class="panel">
+        <h2><i class="bi bi-ui-checks"></i> Quiz</h2>
+        <div id="quiz-rows" class="rows"></div>
+        <div class="row-actions">
+          <button id="btn-add-q" class="btn"><i class="bi bi-plus-circle"></i> Add Question</button>
+        </div>
+      </div>
+      <div class="footer-actions">
+        <button id="btn-save" class="btn primary"><i class="bi bi-save2"></i> Save</button>
+        <button id="btn-delete" class="btn danger hidden"><i class="bi bi-trash3"></i> Delete</button>
+      </div>
+    </section>
+
+    <!-- LEARN -->
+ <section id="view-learn" class="view" aria-labelledby="tab-learn">
+  <div class="panel">
+
+    <div class="learn-top d-flex flex-wrap justify-content-between align-items-center mb-3 gap-3">
+      <div class="d-flex align-items-center gap-2 flex-wrap">
+        <label for="learn-select" class="fw-semibold mb-0">Select a Capsule:</label>
+        <select id="learn-select" aria-label="Select Capsule for Learning" style="padding: 10px 14px; font-size: 1rem; border-radius: 8px; min-width: 220px;">
+        </select>
+        <div class="learn-meta" id="learn-meta"></div>
+      </div>
+
+      <button id="btn-export" class="btn btn-outline-secondary d-flex align-items-center gap-1"
+        style="padding: 10px 18px; font-size: 1rem; border-radius: 8px;">
+        <i class="bi bi-download"></i>
+        <span>Export JSON</span>
+      </button>
+    </div>
+
+    <div class="learn-tabs mt-2 mb-3" role="tablist">
+      <button class="seg-btn active" data-seg="notes">Notes</button>
+      <button class="seg-btn" data-seg="flashcards">Flashcards</button>
+      <button class="seg-btn" data-seg="quiz">Quiz</button>
+    </div>
+
+    <div id="seg-notes" class="seg active" role="tabpanel">
+      <input id="notes-search" type="search" placeholder="Search Notes" />
+      <ol id="notes-list" class="notes-list"></ol>
+    </div>
+
+    <div id="seg-flashcards" class="seg" role="tabpanel">
+      <div class="fc-stage">
+        <div id="fc-card" class="fc-card" tabindex="0"></div>
+      </div>
+      <div class="fc-controls">
+        <button id="fc-prev" class="btn icon-btn"><i class="bi bi-chevron-left"></i></button>
+        <div id="fc-counter" class="fc-counter">0/0</div>
+        <button id="fc-next" class="btn icon-btn"><i class="bi bi-chevron-right"></i></button>
+        <button id="fc-known" class="btn success"><i class="bi bi-check2"></i> I know</button>
+        <button id="fc-unknown" class="btn"><i class="bi bi-x"></i> I don't know</button>
+      </div>
+    </div>
+
+    <div id="seg-quiz" class="seg" role="tabpanel">
+      <div id="quiz-box" class="quiz-box"></div>
+      <div id="quiz-status" class="quiz-status"></div>
+    </div>
+
+  </div>
+</section>
+
+
+  <!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+  crossorigin="anonymous"></script>
+
+
+  <script type="module" src="js/main.js"></script>
+</body>
+
+</html>
